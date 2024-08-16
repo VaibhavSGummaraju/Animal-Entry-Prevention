@@ -1,0 +1,40 @@
+ARDUINO CODE
+
+
+const int trigPin = 9;
+const int echoPin = 10;
+long duration;
+int distance;
+unsigned long lastMotionDetectedTime = 0;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+}
+
+void loop() {
+  // Clears the trigPin condition
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+
+  // Sets the trigPin HIGH (ACTIVE) for 10 microseconds
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  // Reads the echoPin, returns the sound wave travel time in microseconds
+  duration = pulseIn(echoPin, HIGH);
+
+  // Calculating the distance
+  distance = duration * 0.034 / 2;
+
+  // Check if distance is less than 100 cm
+  if (distance < 100) {
+    Serial.println("Motion Detected");
+    lastMotionDetectedTime = millis();
+    Serial.println("motion"); // Send motion detected signal to Python
+  }
+
+  delay(500); // Wait for a short period before measuring again
+}
