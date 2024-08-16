@@ -10,5 +10,11 @@ benefits to users.
 
 
 
+
+
+Install the pretrained model(caffemode and deploy.prototxt) into the python project file path.
+Connect the pics on arduino as stated in the code
+
+
 REFERENCE
 Pushpraj Katiyar ”Person detection from live CCTV video per second (GitHub)” (2019).
